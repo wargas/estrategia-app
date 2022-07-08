@@ -54,7 +54,7 @@ export default function AulaPage() {
             </div>
           </div>
 
-          <div className="bg-white flex divide-x mt-3 shadow rounded-lg overflow-hidden">
+          <div className="bg-white flex-col divide-x mt-3 shadow rounded-lg overflow-hidden">
             {!video ? (
               <div />
             ) : (
@@ -89,7 +89,7 @@ export default function AulaPage() {
                 <div>{video.titulo}</div>
               </div>
             )}
-            <div className="w-[25%] flex flex-col divide-y">
+            <div className="w-full md:w-[25%] flex flex-col divide-y">
               {aula.videos.map((_video: Video, index: number) => (
                 <div
                   onClick={() => setVideo(_video)}

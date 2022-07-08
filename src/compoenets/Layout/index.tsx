@@ -10,7 +10,7 @@ export default function Layout() {
     <div className="h-screen flex flex-col bg-slate-50">
       <Header />
       <div className="flex-1 overflow-y-scroll py-3">
-        <main className="w-full max-w-[1200px] mx-auto">
+        <main className="w-full max-w-[1200px] mx-auto px-3">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/pacote/:id" element={<PacotePage />} />
