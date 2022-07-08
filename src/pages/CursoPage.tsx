@@ -42,10 +42,10 @@ export default function CursoPage() {
                 <div className="mr-3">
                     <div className="w-12 h-12 rounded-full flex items-center justify-center bg-primary-400 text-white">{index}</div>
                 </div>
-                <div>
+                <Link to={`aula/${aula.id}`}>
                   <p className="text-lg font-bold uppercase">{aula.nome} </p>
                   <p className="text-slate-700 font-light">{aula.conteudo}</p>
-                </div>
+                </Link>
                 <div className="ml-auto">
                 
                     <a target="_blank" className="text-gray-700 flex items-center gap-2 px-2" href={aula.pdf}>

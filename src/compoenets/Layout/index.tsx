@@ -3,6 +3,7 @@ import HomePage from "../../pages/HomePage";
 import Header from "./Header";
 import PacotePage from "../../pages/PacotePage";
 import CursoPage from "../../pages/CursoPage";
+import AulaPage from "../../pages/AulaPage";
 
 export default function Layout() {
   return (
@@ -14,6 +15,7 @@ export default function Layout() {
             <Route path="/" element={<HomePage />} />
             <Route path="/pacote/:id" element={<PacotePage />} />
             <Route path="/pacote/:pacote_id/curso/:id" element={<CursoPage />} />
+            <Route path="/pacote/:pacote_id/curso/:curso_id/aula/:id" element={<AulaPage />} />
             <Route path="*" element={<p>404</p>} />
           </Routes>
         </main>
