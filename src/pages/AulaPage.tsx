@@ -54,7 +54,7 @@ export default function AulaPage() {
             </div>
           </div>
 
-          <div className="bg-white flex-col divide-x mt-3 shadow rounded-lg overflow-hidden">
+          <div className="bg-white flex flex-col gap-3 md:flex-row divide-x mt-3 shadow rounded-lg overflow-hidden">
             {!video ? (
               <div />
             ) : (
@@ -86,10 +86,10 @@ export default function AulaPage() {
                   )}
                 </div>
 
-                <div>{video.titulo}</div>
+                <div className="p-3">{video.titulo}</div>
               </div>
             )}
-            <div className="w-full md:w-[25%] flex flex-col divide-y">
+            <div className="w-full md:w-[30%] lg:w-[25%]  flex flex-col divide-y">
               {aula.videos.map((_video: Video, index: number) => (
                 <div
                   onClick={() => setVideo(_video)}
@@ -100,7 +100,7 @@ export default function AulaPage() {
                       : "text-stone-700"
                   }`}
                 >
-                  <div className="text-primary-600">
+                  <div className="">
                     <FaPlay />
                   </div>
                   <div>

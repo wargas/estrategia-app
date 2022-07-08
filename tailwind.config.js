@@ -10,7 +10,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: colors.stone
+        primary: colors.blue
       },
       fontFamily: {
         sans: ['Roboto', ...defaultTheme.fontFamily.sans]

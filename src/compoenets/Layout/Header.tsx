@@ -10,7 +10,7 @@ export default function Header() {
         </div>
         <div className="ml-auto">
             <button onClick={() => auth.logout()} className="flex gap-2 text-sm text-gray-600">
-                {auth?.usuario?.nome}
+                <span className="hidden md:block">{auth?.usuario?.nome}</span>
                 <img src={auth?.usuario?.image} className="w-6 h-6 rounded-full" alt="" />
             </button>
         </div>

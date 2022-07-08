@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Api from "../libs/Api";
 
 export const AuthContext = createContext({} as AuthProviderProps);
@@ -21,8 +21,11 @@ export const AuthProvider = ({children}: any) => {
     const [usuario, setUsuario] = useState<Usuario>()
     const navigate = useNavigate()
 
+    const location = useLocation()
+
     useEffect(() => {
-        verifyLogin()
+        
+        verifyLogin(location.pathname)
     }, [])
 
     async function verifyLogin(redirectTo = '/') {
