@@ -13,6 +13,8 @@ import { Link, useParams } from "react-router-dom";
 import Api from "../libs/Api";
 
 import "@vime/core/themes/default.css";
+import { EstrategiaService } from "../libs/EstrategiaService";
+import { toast } from "react-toastify";
 
 type ResolucoesName = "240p" | "360p" | "480p" | "720p" | "1080p" | string;
 
@@ -23,15 +25,30 @@ type Video = {
   resolucoes: Record<ResolucoesName, string>;
 };
 
+const TOAST_ID = "loading-aula";
+
 export default function AulaPage() {
-  const { pacote_id, curso_id, id } = useParams();
+  const { pacote_id, curso_id, id = 0 } = useParams();
   const [video, setVideo] = useState<Video>();
 
-  const { data: aula, isLoading } = useQuery(["aula", id], async () => {
-    const { data } = await Api.get(`aula/${id}`);
+  useEffect(() => {
+    toast.loading("Carregando dados da aula", { toastId: TOAST_ID });
 
-    return data?.data;
-  });
+    return () => {
+      toast.dismiss(TOAST_ID);
+    };
+  }, []);
+
+  const { data: aula, isLoading } = useQuery(
+    ["aula", id],
+    () => EstrategiaService.getAula(id),
+    {
+      refetchOnWindowFocus: false,
+      onSettled: () => {
+        toast.dismiss(TOAST_ID)
+      }
+    }
+  );
 
   useEffect(() => {
     if (!video && aula?.videos) {
@@ -54,7 +71,7 @@ export default function AulaPage() {
             </div>
           </div>
 
-          <div className="bg-white flex flex-col gap-3 md:flex-row divide-x mt-3 shadow rounded-lg overflow-hidden">
+          <div className="bg-white flex flex-col relative gap-3 md:flex-row divide-x mt-3 shadow rounded-lg overflow-hidden">
             {!video ? (
               <div />
             ) : (
@@ -64,9 +81,12 @@ export default function AulaPage() {
                     (_video: Video) =>
                       _video.id === video?.id && (
                         <Player
+                          key={_video.id}
                           playbackRate={2}
                           playbackQuality={video.resolucao}
-                          playbackQualities={Object.keys(video.resolucoes).map(q => q.replace('p', ''))}
+                          playbackQualities={Object.keys(video.resolucoes).map(
+                            (q) => q.replace("p", "")
+                          )}
                           theme="light"
                           onVmPlaybackQualityChange={() => {}}
                           autoplay
