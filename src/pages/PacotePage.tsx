@@ -2,13 +2,14 @@ import { useQuery } from "react-query";
 import { Link, useParams } from "react-router-dom";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { EstrategiaService } from "../libs/EstrategiaService";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const TOAST_ID = 'load_pacote'
 
 export default function PacotePage() {
   const params = useParams();
+  const [search, setSearch] = useState('')
 
   useEffect(() => {
     toast.loading('Carregando curso', { toastId: TOAST_ID})
@@ -43,8 +44,14 @@ export default function PacotePage() {
             </Link>
             <h1 className="uppercase flex-1 font-bold text-lg md:text-2xl">{data.data.nome}</h1>
           </div>
+          
           <div className="flex flex-col mt-3 bg-white divide-y divide-slate-50 rounded-lg">
-            {data?.data.cursos.map((curso: any) => (
+            <div className="border-b flex p-3">
+              <input type="text" value={search} onChange={ev => setSearch(ev.target.value)} className="h-9 w-full focus:outline-none" name="" id="" />
+            </div>
+            {data?.data.cursos?.filter((curso:any) => {
+              return JSON.stringify(curso).toLocaleLowerCase().includes(search.toLocaleLowerCase())
+            }).map((curso: any) => (
               <Link
                 key={curso.id}
                 to={`/pacote/${params.id}/curso/${curso.id}`}

@@ -27,7 +27,7 @@ export default function HomePage() {
   );
 
   return (
-    <div>
+    <div className="relative">
       <h1 className="text-2xl mb-3 uppercase font-bold">Concursos</h1>
       <hr />
       {isLoading ? (

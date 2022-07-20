@@ -46,8 +46,8 @@ export default function CursoPage() {
             {data?.data.aulas.map((aula: any, index: number) => (
               <div
                 key={aula.id}
-                className={`p-5 flex relative items-center hover:bg-[#efefef] transition-colors  ${
-                  aula.is_disponivel ? "cursor-pointer" : "opacity-50"
+                className={`p-5 flex gap-5 relative items-center hover:bg-[#fefefe] transition-colors  ${
+                  aula.is_disponivel ? "" : "opacity-50"
                 }`}
               >
                 <div className="mr-3">
@@ -59,7 +59,10 @@ export default function CursoPage() {
                   <p className="text-lg font-bold uppercase">{aula.nome} </p>
                   <p className="text-slate-700 font-light">{aula.conteudo}</p>
                 </Link>
-                <div className="ml-auto">
+                <div className="ml-auto flex">
+                  {aula?.tec_concursos && (
+                    <a target="_blank" href={aula.tec_concursos}>Questões</a>
+                  )}
                   <a
                     target="_blank"
                     className="text-gray-700 flex items-center gap-2 px-2"
@@ -70,7 +73,7 @@ export default function CursoPage() {
                 </div>
                 {!aula.is_disponivel && (
                   <span className="bg-primary-500 absolute right-2 top-2 text-[9px] rounded-full text-white px-1">
-                    07/07/2022
+                    {new Date(aula?.data_publicacao).toLocaleDateString()}
                   </span>
                 )}
               </div>
