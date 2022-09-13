@@ -1,6 +1,13 @@
 import Api from "./Api";
 
 export class EstrategiaService {
+
+  static async getConcursos(): Promise<ResponseConcursos>   {
+    const { data } = await Api.get<ResponseConcursos>('curso');
+
+    return data;
+  }
+
   static async getPacotes() {
     const { data } = await Api.get(`assinatura`);
 
@@ -24,4 +31,34 @@ export class EstrategiaService {
 
     return data?.data;
   }
+}
+
+export interface ResponseConcursos {
+  data: {
+    concursos: Concurso[]
+    cargos: any[]
+  }
+}
+
+
+export interface Concurso {
+  id: number
+  titulo: string
+  cursos: Curso[]
+}
+
+export interface Curso {
+  id: number
+  nome: string
+  data_inicio: string
+  data_retirada: string
+  tipo: string
+  id_cargos: any[]
+  icone?: string
+  modalidade: string
+  redirect_area_aluno: any
+  arquivado: boolean
+  favorito: boolean
+  total_aulas_visualizadas: number
+  total_aulas: number
 }

@@ -28,7 +28,7 @@ type Video = {
 const TOAST_ID = "loading-aula";
 
 export default function AulaPage() {
-  const { pacote_id, curso_id, id = 0 } = useParams();
+  const { pacote_id, concurso_id, curso_id, id = 0 } = useParams();
   const [video, setVideo] = useState<Video>();
 
   useEffect(() => {
@@ -62,7 +62,7 @@ export default function AulaPage() {
       {aula && (
         <div>
           <div className="flex items-center gap-3 border-b pb-3">
-            <Link to={`/pacote/${pacote_id}/curso/${curso_id}`}>
+            <Link to={concurso_id ? `/concursos/${concurso_id}/curso/${curso_id}` : `/pacote/${pacote_id}/curso/${curso_id}`}>
               <FaChevronLeft />
             </Link>
             <div>

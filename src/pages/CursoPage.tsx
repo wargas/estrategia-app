@@ -28,6 +28,7 @@ export default function CursoPage() {
     }
   );
 
+  
   return (
     <div>
       {isLoading && <p>Carregando...</p>}
@@ -35,7 +36,7 @@ export default function CursoPage() {
         <div>
           <div className="flex items-center gap-3 pb-3 border-b ">
             <Link
-              to={`/pacote/${params.pacote_id}`}
+              to={params?.concurso_id ? `/concursos/${params?.concurso_id}` : `/pacote/${params.pacote_id}`}
               className="w-10 h-10 rounded-full justify-center flex items-center hover:bg-slate-100"
             >
               <FaChevronLeft />
