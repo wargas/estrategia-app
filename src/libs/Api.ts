@@ -1,27 +1,28 @@
-import axios from "axios";
+import axios from 'axios'
 
 const Api = axios.create({
-    // baseURL: 'http://localhost:3333',
-    baseURL: 'https://puppeteer-testes.herokuapp.com',
+  // baseURL: 'http://localhost:3333',
+  baseURL: 'https://puppeteer-testes.herokuapp.com',
 })
 
-Api.interceptors.request.use((config) => {
+Api.interceptors.request.use(
+  (config) => {
+    try {
+      const token = JSON.parse(localStorage.getItem('auth_token')+'')
 
-    const token = localStorage.getItem('auth_token');
-
-    if(token) {
+      if (token) {
         config.headers = {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         }
-    }
+      }
+    } catch (error) {}
 
-    return config;
-}, error => {
+    return config
+  },
+  (error) => {
     return Error(error)
-})
+  },
+)
 
-
-
-export default Api;
-
+export default Api

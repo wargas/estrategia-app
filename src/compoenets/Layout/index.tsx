@@ -1,7 +1,21 @@
-import { Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useReadLocalStorage } from "usehooks-ts";
 import Header from "./Header";
 
 export default function Layout() {
+
+  const token = useReadLocalStorage('auth_token')
+  const navigate =  useNavigate()
+
+  useEffect(() => {
+
+    if(!token) {
+      navigate('/login')
+    }
+
+  }, [token])
+
   return (
     <div className="h-screen flex flex-col bg-slate-50">
       <Header />
